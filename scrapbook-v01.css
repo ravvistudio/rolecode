@@ -1,0 +1,203 @@
+.sb01-body {
+    background-color: black;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.sb01-body .footer-description-box::-webkit-scrollbar {
+    display: none;
+}
+
+.sb01-body .footer-description-box {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.sb01-body .scrapbook-container {
+    width: 750px;
+    height: 900px;
+    position: relative;
+    overflow: hidden;
+    --color-main-frame: #EDE8D7;
+    --color-inner-frame: #8C474D;
+    --color-note-bg: #B4A7C9;
+}
+
+.sb01-body .main-photo-frame {
+    position: absolute;
+    top: 120px;
+    left: 200px;
+    width: 350px;
+    height: 380px;
+    background-color: var(--color-main-frame);
+    transform: rotate(-3deg);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+.sb01-body .inner-frame {
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-inner-frame);
+    z-index: -1;
+    transform: rotate(5deg);
+}
+
+.sb01-body .main-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transform: rotate(3deg);
+}
+
+.sb01-body .note-sticker {
+    position: absolute;
+    top: 220px;
+    left: 90px;
+    width: 150px;
+    height: 150px;
+    background-color: var(--color-note-bg);
+    transform: rotate(10deg);
+    padding: 10px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+    color: #2D2D2D;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.2;
+    z-index: 3;
+}
+
+.sb01-body .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
+.sb01-body .note-time { font-size: 24px; margin: 0; }
+.sb01-body .note-session { font-size: 16px; margin-top: 5px;}
+
+
+/* --- 3. องค์ประกอบกราฟิก PNG (แก้ไข: เพิ่ม display: block;) --- */
+
+.sb01-body .element-clip {
+    position: absolute;
+    background-image: url('https://img2.pic.in.th/pic/clip01.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    
+    width: 240px;
+    height: 240px;
+    top: -100px;
+    left: 10px;
+    z-index: 6;
+}
+
+.sb01-body .element-pen {
+    position: absolute;
+    background-image: url('https://img5.pic.in.th/file/secure-sv1/pen01.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    
+    width: 220px;
+    height: 150px;
+    top: 320px;
+    left: 100px;
+    transform: rotate(-10deg);
+    z-index: 5;
+}
+
+.sb01-body .element-thing {
+    position: absolute;
+    background-image: var(--url-thing);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    
+    width: 220px;
+    height: 220px;
+    bottom: 380px;
+    right: 80px;
+    transform: rotate(-50deg);
+    z-index: 5;
+}
+
+.sb01-body .quote-area {
+    position: absolute;
+    top: 65px;
+    left: 200px;
+    right: 150px;
+    text-align: left;
+    font-size: 13px;
+    z-index: 1;
+    width: 300px;
+    color: #fff;
+}
+
+.sb01-body .character-name-area {
+    position: absolute;
+    top: 80px;
+    right: 100px;
+    width: 400px;
+    height: 150px;
+    z-index: 100;
+}
+
+.sb01-body .name-title {
+    font-size: 60px;
+    font-weight: 900;
+    color: #444;
+    letter-spacing: 2px;
+    margin: 0;
+    position: absolute;
+    top: -10px;
+    right: 0;
+    width: 400px;
+}
+
+.sb01-body .firstname-text {
+    font-family: 'Roboto Condensed', sans-serif;
+    position: absolute;
+    top: -15px;
+    right: 70px;
+    font-size: 35px;
+    font-weight: 900;
+    color: #444;
+    letter-spacing: 2px;
+    margin: 0;
+    line-height: 1;
+    z-index: 101;
+}
+
+.sb01-body .lastname-text {
+    font-family: 'Mrs Saint Delafield', cursive;
+    position: absolute;
+    top: -10px;
+    right: 30px;
+    font-size: 80px;
+    font-weight: normal;
+    color: var(--color-inner-frame);
+    line-height: 1;
+    z-index: 101;
+    transform: rotate(2deg);
+}
+
+.sb01-body .footer-description-box {
+    position: absolute;
+    bottom: 250px;
+    left: 100px;
+    right: 100px;
+    height: 120px;
+    overflow-y: scroll;
+    padding-right: 15px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #fff;
+}
