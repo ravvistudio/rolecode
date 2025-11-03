@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-.sb01-body {
+.sb01-bebody {
     font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
@@ -8,27 +8,27 @@
     margin: 0;
 }
 
-.sb01-body .footer-description-box::-webkit-scrollbar {
+.sb01-bebody .footer-description-box::-webkit-scrollbar {
     display: none;
 }
 
-.sb01-body .footer-description-box {
+.sb01-bebody .footer-description-box {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-.sb01-body .scrapbook-container {
+.sb01-bebody .scrapbook-container {
     width: 750px;
     height: 900px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     --color-main-frame: #EDE8D7;
     --color-inner-frame: #8C474D;
     --color-note-bg: #B4A7C9;
 }
 
-.sb01-body .main-photo-frame {
-    position: absolute;
+.sb01-bebody .main-photo-frame {
+    position: relative;
     top: 120px;
     left: 200px;
     width: 350px;
@@ -39,7 +39,7 @@
     z-index: 2;
 }
 
-.sb01-body .inner-frame {
+.sb01-bebody .inner-frame {
     position: absolute;
     top: -10px;
     left: -5px;
@@ -50,7 +50,7 @@
     transform: rotate(5deg);
 }
 
-.sb01-body .main-photo {
+.sb01-bebody .main-photo {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -58,7 +58,7 @@
     transform: rotate(3deg);
 }
 
-.sb01-body .note-sticker {
+.sb01-bebody .note-sticker {
     position: absolute;
     top: 220px;
     left: 90px;
@@ -75,11 +75,11 @@
     z-index: 3;
 }
 
-.sb01-body .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
-.sb01-body .note-time { font-size: 24px; margin: 0; }
+.sb01-bebody .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
+.sb01-bebody .note-time { font-size: 24px; margin: 0; }
 .sb01-body .note-session { font-size: 16px; margin-top: 5px;}
 
-.sb01-body .element-clip {
+.sb01-bebody .element-clip {
     position: absolute;
     background-image: url('https://img2.pic.in.th/pic/clip01.png');
     background-size: contain;
@@ -94,7 +94,7 @@
     z-index: 6;
 }
 
-.sb01-body .element-pen {
+.sb01-bebody .element-pen {
     position: absolute;
     background-image: url('https://img5.pic.in.th/file/secure-sv1/pen01.png');
     background-size: contain;
@@ -110,7 +110,7 @@
     z-index: 5;
 }
 
-.sb01-body .element-thing {
+.sb01-bebody .element-thing {
     position: absolute;
     background-image: var(--url-thing);
     background-size: contain;
@@ -126,7 +126,7 @@
     z-index: 5;
 }
 
-.sb01-body .quote-area {
+.sb01-bebody .quote-area {
     position: absolute;
     top: 65px;
     left: 200px;
@@ -138,7 +138,7 @@
     color: #fff;
 }
 
-.sb01-body .character-name-area {
+.sb01-bebody .character-name-area {
     position: absolute;
     top: 80px;
     right: 100px;
@@ -147,7 +147,7 @@
     z-index: 100;
 }
 
-.sb01-body .name-title {
+.sb01-bebody .name-title {
     font-size: 60px;
     font-weight: 900;
     color: #444;
@@ -159,7 +159,7 @@
     width: 400px;
 }
 
-.sb01-body .firstname-text {
+.sb01-bebody .firstname-text {
     font-family: 'Roboto Condensed', sans-serif;
     position: absolute;
     top: -15px;
@@ -173,7 +173,7 @@
     z-index: 101;
 }
 
-.sb01-body .lastname-text {
+.sb01-bebody .lastname-text {
     font-family: 'Mrs Saint Delafield', cursive;
     position: absolute;
     top: -10px;
@@ -186,7 +186,7 @@
     transform: rotate(2deg);
 }
 
-.sb01-body .footer-description-box {
+.sb01-bebody .footer-description-box {
     position: absolute;
     bottom: 250px;
     left: 100px;
