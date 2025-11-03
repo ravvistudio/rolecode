@@ -15,7 +15,7 @@
     scrollbar-width: none;
 }
 
-.sb01-bebody .scrapbook-container {
+.sb01-bebody div.scrapbook-container {
     width: 750px;
     height: 900px;
     position: relative;
