@@ -1,181 +1,133 @@
 @import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Parent Container: ใช้ ID เป็นเกราะป้องกันหลักและบังคับการจัดกึ่งกลาง */
+/* ตั้งค่าหลัก: ใช้ ID Selector ที่แข็งแกร่ง */
 #sb-main {
-    background: black !important;
+    background: black;
     font-family: 'Arial', sans-serif;
-    display: flex !important; /* บังคับใช้ Flex */
-    justify-content: center !important; /* บังคับจัดกึ่งกลาง */
+    display: flex;
+    justify-content: center;
 }
 
-/* Scrollbar (ยังคงเดิม) */
-#sb-main .footer-description-box::-webkit-scrollbar {
-    display: none;
-}
-#sb-main .footer-description-box {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-/* Scrapbook Container: บังคับใช้ Grid Layout */
 #sb-main .scrapbook-container {
     width: 750px;
-    height: 900px;
-    display: grid !important; /* บังคับใช้ Grid */
-    grid-template-areas: "collage" !important; /* บังคับกำหนดพื้นที่ซ้อนทับ */
-    overflow: visible;
+    height: auto; /* ไม่ต้องกำหนด fixed height เพื่อความยืดหยุ่น */
+    display: flex; /* ใช้ Flexbox ในการจัดเรียงหลัก */
+    flex-direction: column; /* เรียงจากบนลงล่าง */
+    padding: 50px 20px;
+    
+    /* ตัวแปรสี */
     --color-main-frame: #EDE8D7;
     --color-inner-frame: #8C474D;
     --color-note-bg: #B4A7C9;
 }
 
-/* ------------------------------------------------------------- */
-/* องค์ประกอบภายใน: ใช้ transform และ Grid Area (ไม่มี !important) */
-/* ------------------------------------------------------------- */
+/* ------------------ FLEX LAYOUT ------------------ */
 
-/* Main Photo Frame */
+#sb-main .flex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+#sb-main .flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ------------------ องค์ประกอบด้านบน ------------------ */
+
+#sb-main .character-name-area {
+    /* ใช้ transform แทนตำแหน่ง absolute */
+    transform: translate(150px, 10px);
+    z-index: 10;
+}
+
+#sb-main .quote-area {
+    transform: rotate(5deg) translate(0px, 30px);
+    color: #fff;
+    width: 250px;
+}
+
+/* ------------------ องค์ประกอบหลัก (รูปและโน้ต) ------------------ */
+
+#sb-main .main-content {
+    align-items: flex-end;
+    margin-top: 50px;
+    gap: 30px;
+}
+
 #sb-main .main-photo-frame {
-    grid-area: collage; 
-    transform: translate(200px, 120px) rotate(-3deg); 
     width: 350px;
     height: 380px;
     background-color: var(--color-main-frame);
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
     z-index: 2;
-}
-
-#sb-main .inner-frame {
-    position: absolute; 
-    top: -10px;
-    left: -5px;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-inner-frame);
-    z-index: -1;
-    transform: rotate(5deg);
+    /* สร้างการเอียงและการทับซ้อนด้วย transform/margin */
+    transform: rotate(-3deg);
+    margin-left: 50px;
+    position: relative; /* สำหรับ clip */
 }
 
 #sb-main .main-photo {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
     transform: rotate(3deg);
 }
 
-/* Note Sticker */
+#sb-main .element-clip {
+    /* ยังใช้ absolute อ้างอิงกับ .main-photo-frame ที่เป็น relative */
+    position: absolute;
+    background-image: url('https://img2.pic.in.th/pic/clip01.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    top: -80px;
+    left: -50px;
+    z-index: 6;
+}
+
 #sb-main .note-sticker {
-    grid-area: collage; 
-    transform: translate(90px, 220px) rotate(10deg); 
     width: 150px;
     height: 150px;
     background-color: var(--color-note-bg);
     padding: 10px;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
-    color: #2D2D2D;
-    text-align: center;
-    font-weight: 500;
-    line-height: 1.2;
     z-index: 3;
-}
-#sb-main .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
-#sb-main .note-time { font-size: 24px; margin: 0; }
-#sb-main .note-session { font-size: 16px; margin-top: 5px;}
-
-/* Element Clip */
-#sb-main .element-clip {
-    grid-area: collage; 
-    background-image: url('https://img2.pic.inth/pic/clip01.png');
-    width: 240px;
-    height: 240px;
-    transform: translate(10px, -100px); 
-    z-index: 6;
+    /* ทับซ้อนด้วย transform */
+    transform: rotate(10deg) translate(-50px, -50px);
 }
 
-/* Element Pen */
 #sb-main .element-pen {
-    grid-area: collage; 
     background-image: url('https://img5.pic.in.th/file/secure-sv1/pen01.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
     width: 220px;
     height: 150px;
-    transform: translate(100px, 320px) rotate(-10deg); 
-    z-index: 5;
+    /* ทับซ้อนด้วย transform */
+    transform: rotate(-10deg) translate(20px, 50px);
 }
 
-/* Element Thing */
+/* ------------------ องค์ประกอบล่าง ------------------ */
+
 #sb-main .element-thing {
-    grid-area: collage; 
     background-image: var(--url-thing);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
     width: 220px;
     height: 220px;
-    transform: translate(450px, 300px) rotate(-50deg); 
+    /* ทับซ้อนด้วย transform */
+    transform: rotate(-50deg) translate(-200px, 50px);
     z-index: 5;
 }
 
-/* Quote Area */
-#sb-main .quote-area {
-    grid-area: collage; 
-    transform: translate(200px, 65px); 
-    text-align: left;
-    font-size: 13px;
-    z-index: 1;
-    width: 300px;
-    color: #fff;
-}
-
-/* Character Name Area */
-#sb-main .character-name-area {
-    grid-area: collage; 
-    transform: translate(250px, 80px); 
-    width: 400px;
-    height: 150px;
-    z-index: 100;
-}
-
-/* องค์ประกอบชื่อด้านในยังคงใช้ position: absolute; เทียบกับ parent ที่เป็น Grid Item */
-#sb-main .name-title {
-    font-size: 60px;
-    font-weight: 900;
-    color: #444;
-    letter-spacing: 2px;
-    margin: 0;
-    position: absolute;
-    top: -10px;
-    right: 0;
-    width: 400px;
-}
-/* ส่วนของชื่อที่เหลือ */
-#sb-main .firstname-text {
-    font-family: 'Roboto Condensed', sans-serif;
-    position: absolute;
-    top: -15px;
-    right: 70px;
-    font-size: 35px;
-    font-weight: 900;
-    color: #444;
-    letter-spacing: 2px;
-    margin: 0;
-    line-height: 1;
-    z-index: 101;
-}
-
-#sb-main .lastname-text {
-    font-family: 'Mrs Saint Delafield', cursive;
-    position: absolute;
-    top: -10px;
-    right: 30px;
-    font-size: 80px;
-    font-weight: normal;
-    color: var(--color-inner-frame);
-    line-height: 1;
-    z-index: 101;
-    transform: rotate(2deg);
-}
-
-/* Footer Description Box */
 #sb-main .footer-description-box {
-    grid-area: collage; 
-    transform: translate(100px, 530px);
     width: 550px; 
     height: 120px;
     overflow-y: scroll;
@@ -184,4 +136,42 @@
     font-size: 13px;
     line-height: 1.5;
     color: #fff;
+    margin-top: -100px; /* ทับซ้อนกับ element-thing */
 }
+
+/* ------------------ ชื่อตัวละคร (ย้ายมาเป็น relative-to-parent) ------------------ */
+
+#sb-main .name-title {
+    font-size: 60px;
+    font-weight: 900;
+    color: #444;
+    letter-spacing: 2px;
+    margin: 0;
+    line-height: 1;
+    display: block; /* เพื่อให้ span จัดเรียงง่าย */
+}
+
+#sb-main .firstname-text {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 35px;
+    font-weight: 900;
+    color: #444;
+    letter-spacing: 2px;
+    display: inline-block;
+    transform: translate(0, 10px);
+}
+
+#sb-main .lastname-text {
+    font-family: 'Mrs Saint Delafield', cursive;
+    font-size: 80px;
+    font-weight: normal;
+    color: var(--color-inner-frame);
+    line-height: 1;
+    display: inline-block;
+    transform: rotate(2deg);
+}
+
+/* Note Sticker Styles (ยังคงเดิม) */
+#sb-main .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
+#sb-main .note-time { font-size: 24px; margin: 0; }
+#sb-main .note-session { font-size: 16px; margin-top: 5px;}
