@@ -1,29 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Parent Container: ใช้ Class ซ้ำเพื่อเพิ่ม Specificity (ต้องเพิ่ม class ซ้ำใน HTML) */
-.sb01-bebody.sb01-bebody {
+/* Parent Container: ใช้ Flex เพื่อจัดกึ่งกลาง */
+.sb01-bebody {
     background: black;
     font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
 }
 
-/* Scrollbar สำหรับ Description Box */
-.sb01-bebody.sb01-bebody .footer-description-box::-webkit-scrollbar {
+/* Scrollbar (ยังคงเดิม) */
+.sb01-bebody .footer-description-box::-webkit-scrollbar {
     display: none;
 }
-
-.sb01-bebody.sb01-bebody .footer-description-box {
+.sb01-bebody .footer-description-box {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-/* Scrapbook Container: ใช้ Class ซ้ำเพื่อเพิ่ม Specificity และยืนยัน position: relative; */
-.sb01-bebody.sb01-bebody .scrapbook-container.scrapbook-container {
+/* Scrapbook Container: ใช้ CSS Grid และกำหนดพื้นที่ซ้อนทับ */
+.sb01-bebody .scrapbook-container {
     width: 750px;
     height: 900px;
-    position: relative; /* หวังว่า Specificity ที่สูงมากจะทำให้ชนะ */
-    z-index: 100; 
+    display: grid; /* เปลี่ยนเป็น Grid */
+    grid-template-areas: "collage"; /* กำหนดพื้นที่หลัก 1x1 */
+    /* ลบ position: relative; ออก */
     overflow: visible;
     --color-main-frame: #EDE8D7;
     --color-inner-frame: #8C474D;
@@ -31,13 +31,13 @@
 }
 
 /* ------------------------------------------------------------- */
-/* องค์ประกอบภายในทั้งหมด: ใช้ Class แม่ที่ Specificity สูงมากนำหน้า */
+/* องค์ประกอบภายใน: ใช้ grid-area และ transform แทน position: absolute */
 /* ------------------------------------------------------------- */
 
 /* Main Photo Frame */
-.sb01-bebody.sb01-bebody .main-photo-frame {
-    position: absolute;
-    transform: translate(200px, 120px) rotate(-3deg); 
+.sb01-bebody .main-photo-frame {
+    grid-area: collage; /* ให้อยู่ในพื้นที่ Grid เดียวกัน */
+    transform: translate(200px, 120px) rotate(-3deg); /* (left, top) */
     width: 350px;
     height: 380px;
     background-color: var(--color-main-frame);
@@ -45,8 +45,9 @@
     z-index: 2;
 }
 
-.sb01-bebody.sb01-bebody .inner-frame {
-    position: absolute;
+.sb01-bebody .inner-frame {
+    /* ยังคงใช้ position: absolute เพราะอ้างอิงกับ parent ที่เป็น grid item */
+    position: absolute; 
     top: -10px;
     left: -5px;
     width: 100%;
@@ -56,7 +57,7 @@
     transform: rotate(5deg);
 }
 
-.sb01-bebody.sb01-bebody .main-photo {
+.sb01-bebody .main-photo {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -65,9 +66,9 @@
 }
 
 /* Note Sticker */
-.sb01-bebody.sb01-bebody .note-sticker {
-    position: absolute;
-    transform: translate(90px, 220px) rotate(10deg); 
+.sb01-bebody .note-sticker {
+    grid-area: collage; /* ซ้อนทับ */
+    transform: translate(90px, 220px) rotate(10deg); /* (left, top) */
     width: 150px;
     height: 150px;
     background-color: var(--color-note-bg);
@@ -79,60 +80,57 @@
     line-height: 1.2;
     z-index: 3;
 }
-
-.sb01-bebody.sb01-bebody .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
-.sb01-bebody.sb01-bebody .note-time { font-size: 24px; margin: 0; }
-.sb01-bebody.sb01-bebody .note-session { font-size: 16px; margin-top: 5px;}
+.sb01-bebody .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
+.sb01-bebody .note-time { font-size: 24px; margin: 0; }
+.sb01-bebody .note-session { font-size: 16px; margin-top: 5px;}
 
 /* Element Clip */
-.sb01-bebody.sb01-bebody .element-clip {
-    position: absolute;
+.sb01-bebody .element-clip {
+    grid-area: collage; /* ซ้อนทับ */
     background-image: url('https://img2.pic.in.th/pic/clip01.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: block;
-    
     width: 240px;
     height: 240px;
-    transform: translate(10px, -100px); 
+    transform: translate(10px, -100px); /* (left, top) */
     z-index: 6;
 }
 
 /* Element Pen */
-.sb01-bebody.sb01-bebody .element-pen {
-    position: absolute;
+.sb01-bebody .element-pen {
+    grid-area: collage; /* ซ้อนทับ */
     background-image: url('https://img5.pic.in.th/file/secure-sv1/pen01.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: block;
-    
     width: 220px;
     height: 150px;
-    transform: translate(100px, 320px) rotate(-10deg); 
+    transform: translate(100px, 320px) rotate(-10deg); /* (left, top) + rotate */
     z-index: 5;
 }
 
 /* Element Thing */
-.sb01-bebody.sb01-bebody .element-thing {
-    position: absolute;
+.sb01-bebody .element-thing {
+    grid-area: collage; /* ซ้อนทับ */
     background-image: var(--url-thing);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: block;
-    
     width: 220px;
     height: 220px;
+    /* คำนวณ translate: (left: 450px, top: 300px) */
     transform: translate(450px, 300px) rotate(-50deg); 
     z-index: 5;
 }
 
 /* Quote Area */
-.sb01-bebody.sb01-bebody .quote-area {
-    position: absolute;
-    transform: translate(200px, 65px);
+.sb01-bebody .quote-area {
+    grid-area: collage; /* ซ้อนทับ */
+    transform: translate(200px, 65px); /* (left, top) */
     text-align: left;
     font-size: 13px;
     z-index: 1;
@@ -141,16 +139,16 @@
 }
 
 /* Character Name Area */
-.sb01-bebody.sb01-bebody .character-name-area {
-    position: absolute;
-    transform: translate(250px, 80px); 
+.sb01-bebody .character-name-area {
+    grid-area: collage; /* ซ้อนทับ */
+    transform: translate(250px, 80px); /* (left, top) */
     width: 400px;
     height: 150px;
     z-index: 100;
 }
 
-/* องค์ประกอบชื่อด้านในยังคงใช้ position: absolute; เทียบกับ parent */
-.sb01-bebody.sb01-bebody .name-title {
+/* องค์ประกอบชื่อด้านใน (ใช้ position: absolute เทียบกับ .character-name-area) */
+.sb01-bebody .name-title {
     font-size: 60px;
     font-weight: 900;
     color: #444;
@@ -162,7 +160,7 @@
     width: 400px;
 }
 
-.sb01-bebody.sb01-bebody .firstname-text {
+.sb01-bebody .firstname-text {
     font-family: 'Roboto Condensed', sans-serif;
     position: absolute;
     top: -15px;
@@ -176,7 +174,7 @@
     z-index: 101;
 }
 
-.sb01-bebody.sb01-bebody .lastname-text {
+.sb01-bebody .lastname-text {
     font-family: 'Mrs Saint Delafield', cursive;
     position: absolute;
     top: -10px;
@@ -190,9 +188,9 @@
 }
 
 /* Footer Description Box */
-.sb01-bebody.sb01-bebody .footer-description-box {
-    position: absolute;
-    transform: translate(100px, 530px);
+.sb01-bebody .footer-description-box {
+    grid-area: collage; /* ซ้อนทับ */
+    transform: translate(100px, 530px); /* (left, top) */
     width: 550px; 
     height: 120px;
     overflow-y: scroll;
