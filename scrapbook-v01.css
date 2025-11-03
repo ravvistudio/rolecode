@@ -1,177 +1,209 @@
 @import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* ตั้งค่าหลัก: ใช้ ID Selector ที่แข็งแกร่ง */
+/* Parent Container: บังคับการจัดกึ่งกลาง */
 #sb-main {
-    background: black;
+    background: black !important; 
     font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
+    display: flex !important; 
+    justify-content: center !important; 
 }
 
+/* Scrapbook Container: บังคับให้เป็นจุดอ้างอิงตำแหน่ง */
 #sb-main .scrapbook-container {
     width: 750px;
-    height: auto; /* ไม่ต้องกำหนด fixed height เพื่อความยืดหยุ่น */
-    display: flex; /* ใช้ Flexbox ในการจัดเรียงหลัก */
-    flex-direction: column; /* เรียงจากบนลงล่าง */
-    padding: 50px 20px;
+    height: 900px;
     
+    /* บังคับ position: relative เพื่อให้องค์ประกอบ absolute ภายในไม่แตก */
+    position: relative !important; 
+    z-index: 100 !important; 
+    
+    overflow: visible;
     /* ตัวแปรสี */
     --color-main-frame: #EDE8D7;
     --color-inner-frame: #8C474D;
     --color-note-bg: #B4A7C9;
+    --url-thing: url('https://i.imgur.com/k9b8zL3.png'); /* รูปคอนโทรลเลอร์ */
+    --url-pen: url('https://i.imgur.com/7b1X5rW.png'); /* รูปปากกา */
+    --url-clip: url('https://i.imgur.com/d8p1rP4.png'); /* รูปคลิป (สมมติ) */
 }
 
-/* ------------------ FLEX LAYOUT ------------------ */
+/* ------------------------------------------------------------- */
+/* องค์ประกอบภายในทั้งหมด: ใช้ position: absolute และ transform */
+/* ------------------------------------------------------------- */
 
-#sb-main .flex-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-#sb-main .flex-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* ------------------ องค์ประกอบด้านบน ------------------ */
-
-#sb-main .character-name-area {
-    /* ใช้ transform แทนตำแหน่ง absolute */
-    transform: translate(150px, 10px);
-    z-index: 10;
-}
-
-#sb-main .quote-area {
-    transform: rotate(5deg) translate(0px, 30px);
-    color: #fff;
-    width: 250px;
-}
-
-/* ------------------ องค์ประกอบหลัก (รูปและโน้ต) ------------------ */
-
-#sb-main .main-content {
-    align-items: flex-end;
-    margin-top: 50px;
-    gap: 30px;
-}
-
+/* Main Photo Frame: ตำแหน่งรูปหลัก */
 #sb-main .main-photo-frame {
-    width: 350px;
-    height: 380px;
+    position: absolute;
+    transform: translate(160px, 150px) rotate(-3deg); /* ขยับไปทางซ้ายบนเล็กน้อย */
+    width: 380px; /* เพิ่มขนาดรูป */
+    height: 420px;
     background-color: var(--color-main-frame);
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
     z-index: 2;
-    /* สร้างการเอียงและการทับซ้อนด้วย transform/margin */
-    transform: rotate(-3deg);
-    margin-left: 50px;
-    position: relative; /* สำหรับ clip */
+}
+
+/* Inner Frame (กรอบด้านใน) */
+#sb-main .inner-frame {
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-inner-frame);
+    z-index: -1;
+    transform: rotate(5deg);
 }
 
 #sb-main .main-photo {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* ใช้ cover เพื่อให้ภาพเต็มกรอบ */
     display: block;
     transform: rotate(3deg);
 }
 
-#sb-main .element-clip {
-    /* ยังใช้ absolute อ้างอิงกับ .main-photo-frame ที่เป็น relative */
+/* Note Sticker */
+#sb-main .note-sticker {
     position: absolute;
-    background-image: url('https://img2.pic.in.th/pic/clip01.png');
-    background-size: contain;
-    background-repeat: no-repeat;
+    transform: translate(60px, 200px) rotate(-10deg); /* ขยับไปทางซ้ายบนของรูปหลัก */
     width: 200px;
     height: 200px;
-    top: -80px;
-    left: -50px;
+    background-color: var(--color-note-bg);
+    padding: 20px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    color: #2D2D2D;
+    text-align: left;
+    font-weight: 500;
+    line-height: 1.2;
+    z-index: 3;
+}
+#sb-main .note-title { font-size: 16px; margin-bottom: 5px; font-weight: bold; }
+#sb-main .note-time { font-size: 28px; margin: 0; }
+#sb-main .note-session { font-size: 18px; margin-top: 5px;}
+
+/* Element Clip (ปรับให้แสดงผลอยู่บนกรอบรูปหลัก) */
+#sb-main .element-clip {
+    position: absolute;
+    background-image: var(--url-clip); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    width: 150px;
+    height: 150px;
+    top: -50px; 
+    left: 280px; /* ขยับไปมุมขวาบนของรูปหลัก */
+    transform: rotate(15deg);
     z-index: 6;
 }
 
-#sb-main .note-sticker {
-    width: 150px;
-    height: 150px;
-    background-color: var(--color-note-bg);
-    padding: 10px;
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
-    z-index: 3;
-    /* ทับซ้อนด้วย transform */
-    transform: rotate(10deg) translate(-50px, -50px);
-}
-
+/* Element Pen (ปากกา) */
 #sb-main .element-pen {
-    background-image: url('https://img5.pic.in.th/file/secure-sv1/pen01.png');
+    position: absolute;
+    background-image: var(--url-pen);
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
     display: block;
-    width: 220px;
-    height: 150px;
-    /* ทับซ้อนด้วย transform */
-    transform: rotate(-10deg) translate(20px, 50px);
-}
-
-/* ------------------ องค์ประกอบล่าง ------------------ */
-
-#sb-main .element-thing {
-    background-image: var(--url-thing);
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: block;
-    width: 220px;
-    height: 220px;
-    /* ทับซ้อนด้วย transform */
-    transform: rotate(-50deg) translate(-200px, 50px);
+    width: 180px;
+    height: 180px;
+    transform: translate(150px, 350px) rotate(15deg); /* วางพาดที่โน้ต */
     z-index: 5;
 }
 
-#sb-main .footer-description-box {
-    width: 550px; 
-    height: 120px;
-    overflow-y: scroll;
-    padding-right: 15px;
-    text-align: center;
-    font-size: 13px;
-    line-height: 1.5;
-    color: #fff;
-    margin-top: -100px; /* ทับซ้อนกับ element-thing */
+/* Element Thing (คอนโทรลเลอร์) */
+#sb-main .element-thing {
+    position: absolute;
+    background-image: var(--url-thing);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    width: 350px;
+    height: 300px;
+    transform: translate(450px, 300px) rotate(-15deg); 
+    z-index: 5;
 }
 
-/* ------------------ ชื่อตัวละคร (ย้ายมาเป็น relative-to-parent) ------------------ */
+/* Quote Area: ตำแหน่งข้อความ Who We R? */
+#sb-main .quote-area {
+    position: absolute;
+    transform: translate(50px, 100px); /* วางไว้ด้านซ้ายบนของกรอบรูป */
+    text-align: left;
+    font-size: 18px;
+    line-height: 1.2;
+    z-index: 1;
+    width: 300px;
+    color: #fff;
+}
+#sb-main .quote-style {
+    color: var(--color-inner-frame); 
+    font-weight: bold;
+}
 
+/* Character Name Area: ตำแหน่งชื่อ Beryl Seymour */
+#sb-main .character-name-area {
+    position: absolute;
+    transform: translate(50px, 40px); 
+    width: 600px;
+    height: 150px;
+    z-index: 100;
+    text-align: left;
+}
+
+/* องค์ประกอบชื่อด้านใน */
 #sb-main .name-title {
     font-size: 60px;
     font-weight: 900;
     color: #444;
     letter-spacing: 2px;
     margin: 0;
-    line-height: 1;
-    display: block; /* เพื่อให้ span จัดเรียงง่าย */
+    /* เปลี่ยนจาก position: absolute เป็นจัดเรียงปกติใน name-area */
+    display: block; 
 }
 
 #sb-main .firstname-text {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 35px;
+    font-size: 50px;
     font-weight: 900;
     color: #444;
     letter-spacing: 2px;
-    display: inline-block;
+    display: block;
+    line-height: 1;
+    z-index: 101;
     transform: translate(0, 10px);
 }
 
 #sb-main .lastname-text {
     font-family: 'Mrs Saint Delafield', cursive;
-    font-size: 80px;
+    font-size: 100px;
     font-weight: normal;
     color: var(--color-inner-frame);
     line-height: 1;
-    display: inline-block;
+    z-index: 101;
+    display: block;
     transform: rotate(2deg);
 }
 
-/* Note Sticker Styles (ยังคงเดิม) */
-#sb-main .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
-#sb-main .note-time { font-size: 24px; margin: 0; }
-#sb-main .note-session { font-size: 16px; margin-top: 5px;}
+/* Footer Description Box: คำอธิบายด้านล่าง */
+#sb-main .footer-description-box {
+    position: absolute;
+    transform: translate(80px, 680px); /* วางไว้ด้านล่าง */
+    width: 600px; 
+    height: 120px;
+    overflow-y: scroll;
+    padding: 10px;
+    text-align: justify; /* จัดชิดซ้ายขวา */
+    font-size: 14px;
+    line-height: 1.5;
+    color: #fff;
+}
+
+/* Scrollbar Styles */
+#sb-main .footer-description-box::-webkit-scrollbar {
+    display: none;
+}
+#sb-main .footer-description-box {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
