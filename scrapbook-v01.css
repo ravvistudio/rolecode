@@ -1,43 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-.sb01-bebody {
+/* Parent Container: ใช้ div. นำหน้าเพื่อเพิ่ม Specificity ในการกำหนดพื้นหลังและการจัดกึ่งกลาง */
+div.sb01-bebody {
+    background: black;
     font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
 }
 
-.sb01-bebody .footer-description-box::-webkit-scrollbar {
+div.sb01-bebody .footer-description-box::-webkit-scrollbar {
     display: none;
 }
 
-.sb01-bebody .footer-description-box {
+div.sb01-bebody .footer-description-box {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-.sb01-bebody .scrapbook-container {
+/* Scrapbook Container: เพิ่ม div. นำหน้าและยืนยัน position: relative; */
+div.sb01-bebody div.scrapbook-container {
     width: 750px;
     height: 900px;
-    position: relative;
+    position: relative; /* สำคัญมาก: กำหนดจุดอ้างอิงให้ Absolute Items */
     overflow: visible;
     --color-main-frame: #EDE8D7;
     --color-inner-frame: #8C474D;
     --color-note-bg: #B4A7C9;
 }
 
-.sb01-bebody .main-photo-frame {
-    position: relative;
-    top: 120px;
-    left: 200px;
+/* Main Photo Frame: ใช้ transform: translate() แทน top/left */
+div.sb01-bebody .main-photo-frame {
+    position: absolute;
+    transform: translate(200px, 120px) rotate(-3deg); /* (left, top) */
     width: 350px;
     height: 380px;
     background-color: var(--color-main-frame);
-    transform: rotate(-3deg);
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
     z-index: 2;
 }
 
-.sb01-bebody .inner-frame {
+div.sb01-bebody .inner-frame {
     position: absolute;
     top: -10px;
     left: -5px;
@@ -48,7 +50,7 @@
     transform: rotate(5deg);
 }
 
-.sb01-bebody .main-photo {
+div.sb01-bebody .main-photo {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -56,14 +58,13 @@
     transform: rotate(3deg);
 }
 
-.sb01-bebody .note-sticker {
+/* Note Sticker: ใช้ transform: translate() แทน top/left */
+div.sb01-bebody .note-sticker {
     position: absolute;
-    top: 220px;
-    left: 90px;
+    transform: translate(90px, 220px) rotate(10deg); /* (left, top) */
     width: 150px;
     height: 150px;
     background-color: var(--color-note-bg);
-    transform: rotate(10deg);
     padding: 10px;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
     color: #2D2D2D;
@@ -73,11 +74,12 @@
     z-index: 3;
 }
 
-.sb01-bebody .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
-.sb01-bebody .note-time { font-size: 24px; margin: 0; }
-.sb01-body .note-session { font-size: 16px; margin-top: 5px;}
+div.sb01-bebody .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
+div.sb01-bebody .note-time { font-size: 24px; margin: 0; }
+div.sb01-bebody .note-session { font-size: 16px; margin-top: 5px;}
 
-.sb01-bebody .element-clip {
+/* Element Clip: ใช้ transform: translate() แทน top/left */
+div.sb01-bebody .element-clip {
     position: absolute;
     background-image: url('https://img2.pic.in.th/pic/clip01.png');
     background-size: contain;
@@ -87,12 +89,12 @@
     
     width: 240px;
     height: 240px;
-    top: -100px;
-    left: 10px;
+    transform: translate(10px, -100px); /* (left, top) */
     z-index: 6;
 }
 
-.sb01-bebody .element-pen {
+/* Element Pen: ใช้ transform: translate() แทน top/left */
+div.sb01-bebody .element-pen {
     position: absolute;
     background-image: url('https://img5.pic.in.th/file/secure-sv1/pen01.png');
     background-size: contain;
@@ -102,13 +104,12 @@
     
     width: 220px;
     height: 150px;
-    top: 320px;
-    left: 100px;
-    transform: rotate(-10deg);
+    transform: translate(100px, 320px) rotate(-10deg); /* (left, top) + rotate */
     z-index: 5;
 }
 
-.sb01-bebody .element-thing {
+/* Element Thing: ใช้ transform: translate() แทน bottom/right */
+div.sb01-bebody .element-thing {
     position: absolute;
     background-image: var(--url-thing);
     background-size: contain;
@@ -118,17 +119,19 @@
     
     width: 220px;
     height: 220px;
-    bottom: 380px;
-    right: 80px;
-    transform: rotate(-50deg);
+    /* คำนวณ translate จาก bottom: 380px; right: 80px; โดยเทียบกับขนาด 750x900 */
+    /* top = 900 - 220 (height) - 380 = 300px */
+    /* left = 750 - 220 (width) - 80 = 450px */
+    transform: translate(450px, 300px) rotate(-50deg); 
     z-index: 5;
 }
 
-.sb01-bebody .quote-area {
+/* Quote Area: ใช้ transform: translate() แทน top/left/right */
+div.sb01-bebody .quote-area {
     position: absolute;
-    top: 65px;
-    left: 200px;
-    right: 150px;
+    transform: translate(200px, 65px); /* (left, top) */
+    
+    /* width และ text-align ยังคงเดิม */
     text-align: left;
     font-size: 13px;
     z-index: 1;
@@ -136,16 +139,20 @@
     color: #fff;
 }
 
-.sb01-bebody .character-name-area {
+/* Character Name Area: ใช้ transform: translate() แทน top/right */
+div.sb01-bebody .character-name-area {
     position: absolute;
-    top: 80px;
-    right: 100px;
+    /* คำนวณ translate จาก top: 80px; right: 100px; */
+    /* left = 750 - 400 (width) - 100 = 250px */
+    transform: translate(250px, 80px); /* (left, top) */
+    
     width: 400px;
     height: 150px;
     z-index: 100;
 }
 
-.sb01-bebody .name-title {
+/* ชื่อภายในยังคงใช้ position: absolute; เทียบกับ .character-name-area ที่ตอนนี้เป็น absolute แล้ว */
+div.sb01-bebody .name-title {
     font-size: 60px;
     font-weight: 900;
     color: #444;
@@ -157,7 +164,7 @@
     width: 400px;
 }
 
-.sb01-bebody .firstname-text {
+div.sb01-bebody .firstname-text {
     font-family: 'Roboto Condensed', sans-serif;
     position: absolute;
     top: -15px;
@@ -171,7 +178,7 @@
     z-index: 101;
 }
 
-.sb01-bebody .lastname-text {
+div.sb01-bebody .lastname-text {
     font-family: 'Mrs Saint Delafield', cursive;
     position: absolute;
     top: -10px;
@@ -184,16 +191,9 @@
     transform: rotate(2deg);
 }
 
-.sb01-bebody .footer-description-box {
+/* Footer Description Box: ใช้ transform: translate() แทน bottom/left/right */
+div.sb01-bebody .footer-description-box {
     position: absolute;
-    bottom: 250px;
-    left: 100px;
-    right: 100px;
-    height: 120px;
-    overflow-y: scroll;
-    padding-right: 15px;
-    text-align: center;
-    font-size: 13px;
-    line-height: 1.5;
-    color: #fff;
-}
+    /* คำนวณ translate จาก bottom: 250px; left: 100px; right: 100px; */
+    /* top = 900 - 120 (height) - 250 = 530px */
+    /* left: 100px; (จาก
