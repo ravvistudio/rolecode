@@ -4,8 +4,6 @@
     font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
-    position: relative;
-    overflow: visible !important;
 }
 
 .sb01-bebody .footer-description-box::-webkit-scrollbar {
