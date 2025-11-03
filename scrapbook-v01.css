@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
 .sb01-body {
     font-family: 'Arial', sans-serif;
     display: flex;
@@ -76,9 +78,6 @@
 .sb01-body .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
 .sb01-body .note-time { font-size: 24px; margin: 0; }
 .sb01-body .note-session { font-size: 16px; margin-top: 5px;}
-
-
-/* --- 3. องค์ประกอบกราฟิก PNG (แก้ไข: เพิ่ม display: block;) --- */
 
 .sb01-body .element-clip {
     position: absolute;
