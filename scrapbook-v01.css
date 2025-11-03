@@ -1,49 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Parent Container: บังคับการจัดกึ่งกลาง */
-#sb-main {
-    background: black !important; 
+.sb01-bebody {
+    background-color: black;
     font-family: 'Arial', sans-serif;
-    display: flex !important; 
-    justify-content: center !important; 
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin: 0;
 }
 
-/* Scrapbook Container: บังคับให้เป็นจุดอ้างอิงตำแหน่ง */
-#sb-main .scrapbook-container {
+.sb01-bebody .footer-description-box::-webkit-scrollbar {
+    display: none;
+}
+
+.sb01-bebody .footer-description-box {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.sb01-bebody .scrapbook-container {
     width: 750px;
     height: 900px;
-    
-    /* บังคับ position: relative เพื่อให้องค์ประกอบ absolute ภายในไม่แตก */
-    position: relative !important; 
-    z-index: 100 !important; 
-    
+    position: relative;
     overflow: visible;
-    /* ตัวแปรสี */
     --color-main-frame: #EDE8D7;
     --color-inner-frame: #8C474D;
     --color-note-bg: #B4A7C9;
-    --url-thing: url('https://i.imgur.com/k9b8zL3.png'); /* รูปคอนโทรลเลอร์ */
-    --url-pen: url('https://i.imgur.com/7b1X5rW.png'); /* รูปปากกา */
-    --url-clip: url('https://i.imgur.com/d8p1rP4.png'); /* รูปคลิป (สมมติ) */
 }
 
-/* ------------------------------------------------------------- */
-/* องค์ประกอบภายในทั้งหมด: ใช้ position: absolute และ transform */
-/* ------------------------------------------------------------- */
-
-/* Main Photo Frame: ตำแหน่งรูปหลัก */
-#sb-main .main-photo-frame {
-    position: absolute;
-    transform: translate(160px, 150px) rotate(-3deg); /* ขยับไปทางซ้ายบนเล็กน้อย */
-    width: 380px; /* เพิ่มขนาดรูป */
-    height: 420px;
+.sb01-bebody .main-photo-frame {
+    position: relative;
+    top: 120px;
+    left: 200px;
+    width: 350px;
+    height: 380px;
     background-color: var(--color-main-frame);
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    transform: rotate(-3deg);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
     z-index: 2;
 }
 
-/* Inner Frame (กรอบด้านใน) */
-#sb-main .inner-frame {
+.sb01-bebody .inner-frame {
     position: absolute;
     top: -10px;
     left: -5px;
@@ -54,156 +51,152 @@
     transform: rotate(5deg);
 }
 
-#sb-main .main-photo {
+.sb01-bebody .main-photo {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* ใช้ cover เพื่อให้ภาพเต็มกรอบ */
+    object-fit: contain;
     display: block;
     transform: rotate(3deg);
 }
 
-/* Note Sticker */
-#sb-main .note-sticker {
+.sb01-bebody .note-sticker {
     position: absolute;
-    transform: translate(60px, 200px) rotate(-10deg); /* ขยับไปทางซ้ายบนของรูปหลัก */
-    width: 200px;
-    height: 200px;
+    top: 220px;
+    left: 90px;
+    width: 150px;
+    height: 150px;
     background-color: var(--color-note-bg);
-    padding: 20px;
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    transform: rotate(10deg);
+    padding: 10px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
     color: #2D2D2D;
-    text-align: left;
+    text-align: center;
     font-weight: 500;
     line-height: 1.2;
     z-index: 3;
 }
-#sb-main .note-title { font-size: 16px; margin-bottom: 5px; font-weight: bold; }
-#sb-main .note-time { font-size: 28px; margin: 0; }
-#sb-main .note-session { font-size: 18px; margin-top: 5px;}
 
-/* Element Clip (ปรับให้แสดงผลอยู่บนกรอบรูปหลัก) */
-#sb-main .element-clip {
+.sb01-bebody .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
+.sb01-bebody .note-time { font-size: 24px; margin: 0; }
+.sb01-body .note-session { font-size: 16px; margin-top: 5px;}
+
+.sb01-bebody .element-clip {
     position: absolute;
-    background-image: var(--url-clip); 
+    background-image: url('https://img2.pic.in.th/pic/clip01.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: block;
-    width: 150px;
-    height: 150px;
-    top: -50px; 
-    left: 280px; /* ขยับไปมุมขวาบนของรูปหลัก */
-    transform: rotate(15deg);
+    
+    width: 240px;
+    height: 240px;
+    top: -100px;
+    left: 10px;
     z-index: 6;
 }
 
-/* Element Pen (ปากกา) */
-#sb-main .element-pen {
+.sb01-bebody .element-pen {
     position: absolute;
-    background-image: var(--url-pen);
+    background-image: url('https://img5.pic.in.th/file/secure-sv1/pen01.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: block;
-    width: 180px;
-    height: 180px;
-    transform: translate(150px, 350px) rotate(15deg); /* วางพาดที่โน้ต */
+    
+    width: 220px;
+    height: 150px;
+    top: 320px;
+    left: 100px;
+    transform: rotate(-10deg);
     z-index: 5;
 }
 
-/* Element Thing (คอนโทรลเลอร์) */
-#sb-main .element-thing {
+.sb01-bebody .element-thing {
     position: absolute;
     background-image: var(--url-thing);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: block;
-    width: 350px;
-    height: 300px;
-    transform: translate(450px, 300px) rotate(-15deg); 
+    
+    width: 220px;
+    height: 220px;
+    bottom: 380px;
+    right: 80px;
+    transform: rotate(-50deg);
     z-index: 5;
 }
 
-/* Quote Area: ตำแหน่งข้อความ Who We R? */
-#sb-main .quote-area {
+.sb01-bebody .quote-area {
     position: absolute;
-    transform: translate(50px, 100px); /* วางไว้ด้านซ้ายบนของกรอบรูป */
+    top: 65px;
+    left: 200px;
+    right: 150px;
     text-align: left;
-    font-size: 18px;
-    line-height: 1.2;
+    font-size: 13px;
     z-index: 1;
     width: 300px;
     color: #fff;
 }
-#sb-main .quote-style {
-    color: var(--color-inner-frame); 
-    font-weight: bold;
-}
 
-/* Character Name Area: ตำแหน่งชื่อ Beryl Seymour */
-#sb-main .character-name-area {
+.sb01-bebody .character-name-area {
     position: absolute;
-    transform: translate(50px, 40px); 
-    width: 600px;
+    top: 80px;
+    right: 100px;
+    width: 400px;
     height: 150px;
     z-index: 100;
-    text-align: left;
 }
 
-/* องค์ประกอบชื่อด้านใน */
-#sb-main .name-title {
+.sb01-bebody .name-title {
     font-size: 60px;
     font-weight: 900;
     color: #444;
     letter-spacing: 2px;
     margin: 0;
-    /* เปลี่ยนจาก position: absolute เป็นจัดเรียงปกติใน name-area */
-    display: block; 
+    position: absolute;
+    top: -10px;
+    right: 0;
+    width: 400px;
 }
 
-#sb-main .firstname-text {
+.sb01-bebody .firstname-text {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 50px;
+    position: absolute;
+    top: -15px;
+    right: 70px;
+    font-size: 35px;
     font-weight: 900;
     color: #444;
     letter-spacing: 2px;
-    display: block;
+    margin: 0;
     line-height: 1;
     z-index: 101;
-    transform: translate(0, 10px);
 }
 
-#sb-main .lastname-text {
+.sb01-bebody .lastname-text {
     font-family: 'Mrs Saint Delafield', cursive;
-    font-size: 100px;
+    position: absolute;
+    top: -10px;
+    right: 30px;
+    font-size: 80px;
     font-weight: normal;
     color: var(--color-inner-frame);
     line-height: 1;
     z-index: 101;
-    display: block;
     transform: rotate(2deg);
 }
 
-/* Footer Description Box: คำอธิบายด้านล่าง */
-#sb-main .footer-description-box {
+.sb01-bebody .footer-description-box {
     position: absolute;
-    transform: translate(80px, 680px); /* วางไว้ด้านล่าง */
-    width: 600px; 
+    bottom: 250px;
+    left: 100px;
+    right: 100px;
     height: 120px;
     overflow-y: scroll;
-    padding: 10px;
-    text-align: justify; /* จัดชิดซ้ายขวา */
-    font-size: 14px;
+    padding-right: 15px;
+    text-align: center;
+    font-size: 13px;
     line-height: 1.5;
     color: #fff;
-}
-
-/* Scrollbar Styles */
-#sb-main .footer-description-box::-webkit-scrollbar {
-    display: none;
-}
-#sb-main .footer-description-box {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }
