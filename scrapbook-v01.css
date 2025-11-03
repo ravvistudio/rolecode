@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Parent Container: ใช้ ID เป็นเกราะป้องกันหลัก */
+/* Parent Container: ใช้ ID เป็นเกราะป้องกันหลักและบังคับการจัดกึ่งกลาง */
 #sb-main {
-    background: black;
+    background: black !important;
     font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
+    display: flex !important; /* บังคับใช้ Flex */
+    justify-content: center !important; /* บังคับจัดกึ่งกลาง */
 }
 
 /* Scrollbar (ยังคงเดิม) */
@@ -17,12 +17,12 @@
     scrollbar-width: none;
 }
 
-/* Scrapbook Container: ใช้ ID นำหน้า และใช้ Grid Layout */
+/* Scrapbook Container: บังคับใช้ Grid Layout */
 #sb-main .scrapbook-container {
     width: 750px;
     height: 900px;
-    display: grid; 
-    grid-template-areas: "collage"; /* กำหนดพื้นที่ซ้อนทับ */
+    display: grid !important; /* บังคับใช้ Grid */
+    grid-template-areas: "collage" !important; /* บังคับกำหนดพื้นที่ซ้อนทับ */
     overflow: visible;
     --color-main-frame: #EDE8D7;
     --color-inner-frame: #8C474D;
@@ -30,7 +30,7 @@
 }
 
 /* ------------------------------------------------------------- */
-/* องค์ประกอบภายในทั้งหมด: อ้างอิงด้วย ID */
+/* องค์ประกอบภายใน: ใช้ transform และ Grid Area (ไม่มี !important) */
 /* ------------------------------------------------------------- */
 
 /* Main Photo Frame */
@@ -85,8 +85,7 @@
 /* Element Clip */
 #sb-main .element-clip {
     grid-area: collage; 
-    background-image: url('https://img2.pic.in.th/pic/clip01.png');
-    /* ... */
+    background-image: url('https://img2.pic.inth/pic/clip01.png');
     width: 240px;
     height: 240px;
     transform: translate(10px, -100px); 
@@ -97,7 +96,6 @@
 #sb-main .element-pen {
     grid-area: collage; 
     background-image: url('https://img5.pic.in.th/file/secure-sv1/pen01.png');
-    /* ... */
     width: 220px;
     height: 150px;
     transform: translate(100px, 320px) rotate(-10deg); 
@@ -108,7 +106,6 @@
 #sb-main .element-thing {
     grid-area: collage; 
     background-image: var(--url-thing);
-    /* ... */
     width: 220px;
     height: 220px;
     transform: translate(450px, 300px) rotate(-50deg); 
@@ -135,7 +132,7 @@
     z-index: 100;
 }
 
-/* องค์ประกอบชื่อด้านในยังคงใช้ position: absolute; เทียบกับ parent ที่ตอนนี้เป็น Grid Item */
+/* องค์ประกอบชื่อด้านในยังคงใช้ position: absolute; เทียบกับ parent ที่เป็น Grid Item */
 #sb-main .name-title {
     font-size: 60px;
     font-weight: 900;
@@ -147,8 +144,7 @@
     right: 0;
     width: 400px;
 }
-
-/* องค์ประกอบชื่ออื่นๆ */
+/* ส่วนของชื่อที่เหลือ */
 #sb-main .firstname-text {
     font-family: 'Roboto Condensed', sans-serif;
     position: absolute;
