@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Parent Container: ใช้ Flex เพื่อจัดกึ่งกลาง */
-.sb01-bebody {
+/* Parent Container: ใช้ ID เป็นเกราะป้องกันหลัก */
+#sb-main {
     background: black;
     font-family: 'Arial', sans-serif;
     display: flex;
@@ -9,21 +9,20 @@
 }
 
 /* Scrollbar (ยังคงเดิม) */
-.sb01-bebody .footer-description-box::-webkit-scrollbar {
+#sb-main .footer-description-box::-webkit-scrollbar {
     display: none;
 }
-.sb01-bebody .footer-description-box {
+#sb-main .footer-description-box {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-/* Scrapbook Container: ใช้ CSS Grid และกำหนดพื้นที่ซ้อนทับ */
-.sb01-bebody .scrapbook-container {
+/* Scrapbook Container: ใช้ ID นำหน้า และใช้ Grid Layout */
+#sb-main .scrapbook-container {
     width: 750px;
     height: 900px;
-    display: grid; /* เปลี่ยนเป็น Grid */
-    grid-template-areas: "collage"; /* กำหนดพื้นที่หลัก 1x1 */
-    /* ลบ position: relative; ออก */
+    display: grid; 
+    grid-template-areas: "collage"; /* กำหนดพื้นที่ซ้อนทับ */
     overflow: visible;
     --color-main-frame: #EDE8D7;
     --color-inner-frame: #8C474D;
@@ -31,13 +30,13 @@
 }
 
 /* ------------------------------------------------------------- */
-/* องค์ประกอบภายใน: ใช้ grid-area และ transform แทน position: absolute */
+/* องค์ประกอบภายในทั้งหมด: อ้างอิงด้วย ID */
 /* ------------------------------------------------------------- */
 
 /* Main Photo Frame */
-.sb01-bebody .main-photo-frame {
-    grid-area: collage; /* ให้อยู่ในพื้นที่ Grid เดียวกัน */
-    transform: translate(200px, 120px) rotate(-3deg); /* (left, top) */
+#sb-main .main-photo-frame {
+    grid-area: collage; 
+    transform: translate(200px, 120px) rotate(-3deg); 
     width: 350px;
     height: 380px;
     background-color: var(--color-main-frame);
@@ -45,8 +44,7 @@
     z-index: 2;
 }
 
-.sb01-bebody .inner-frame {
-    /* ยังคงใช้ position: absolute เพราะอ้างอิงกับ parent ที่เป็น grid item */
+#sb-main .inner-frame {
     position: absolute; 
     top: -10px;
     left: -5px;
@@ -57,7 +55,7 @@
     transform: rotate(5deg);
 }
 
-.sb01-bebody .main-photo {
+#sb-main .main-photo {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -66,9 +64,9 @@
 }
 
 /* Note Sticker */
-.sb01-bebody .note-sticker {
-    grid-area: collage; /* ซ้อนทับ */
-    transform: translate(90px, 220px) rotate(10deg); /* (left, top) */
+#sb-main .note-sticker {
+    grid-area: collage; 
+    transform: translate(90px, 220px) rotate(10deg); 
     width: 150px;
     height: 150px;
     background-color: var(--color-note-bg);
@@ -80,57 +78,47 @@
     line-height: 1.2;
     z-index: 3;
 }
-.sb01-bebody .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
-.sb01-bebody .note-time { font-size: 24px; margin: 0; }
-.sb01-bebody .note-session { font-size: 16px; margin-top: 5px;}
+#sb-main .note-title { font-size: 14px; margin-bottom: 5px; font-weight: bold; }
+#sb-main .note-time { font-size: 24px; margin: 0; }
+#sb-main .note-session { font-size: 16px; margin-top: 5px;}
 
 /* Element Clip */
-.sb01-bebody .element-clip {
-    grid-area: collage; /* ซ้อนทับ */
+#sb-main .element-clip {
+    grid-area: collage; 
     background-image: url('https://img2.pic.in.th/pic/clip01.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: block;
+    /* ... */
     width: 240px;
     height: 240px;
-    transform: translate(10px, -100px); /* (left, top) */
+    transform: translate(10px, -100px); 
     z-index: 6;
 }
 
 /* Element Pen */
-.sb01-bebody .element-pen {
-    grid-area: collage; /* ซ้อนทับ */
+#sb-main .element-pen {
+    grid-area: collage; 
     background-image: url('https://img5.pic.in.th/file/secure-sv1/pen01.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: block;
+    /* ... */
     width: 220px;
     height: 150px;
-    transform: translate(100px, 320px) rotate(-10deg); /* (left, top) + rotate */
+    transform: translate(100px, 320px) rotate(-10deg); 
     z-index: 5;
 }
 
 /* Element Thing */
-.sb01-bebody .element-thing {
-    grid-area: collage; /* ซ้อนทับ */
+#sb-main .element-thing {
+    grid-area: collage; 
     background-image: var(--url-thing);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: block;
+    /* ... */
     width: 220px;
     height: 220px;
-    /* คำนวณ translate: (left: 450px, top: 300px) */
     transform: translate(450px, 300px) rotate(-50deg); 
     z-index: 5;
 }
 
 /* Quote Area */
-.sb01-bebody .quote-area {
-    grid-area: collage; /* ซ้อนทับ */
-    transform: translate(200px, 65px); /* (left, top) */
+#sb-main .quote-area {
+    grid-area: collage; 
+    transform: translate(200px, 65px); 
     text-align: left;
     font-size: 13px;
     z-index: 1;
@@ -139,16 +127,16 @@
 }
 
 /* Character Name Area */
-.sb01-bebody .character-name-area {
-    grid-area: collage; /* ซ้อนทับ */
-    transform: translate(250px, 80px); /* (left, top) */
+#sb-main .character-name-area {
+    grid-area: collage; 
+    transform: translate(250px, 80px); 
     width: 400px;
     height: 150px;
     z-index: 100;
 }
 
-/* องค์ประกอบชื่อด้านใน (ใช้ position: absolute เทียบกับ .character-name-area) */
-.sb01-bebody .name-title {
+/* องค์ประกอบชื่อด้านในยังคงใช้ position: absolute; เทียบกับ parent ที่ตอนนี้เป็น Grid Item */
+#sb-main .name-title {
     font-size: 60px;
     font-weight: 900;
     color: #444;
@@ -160,7 +148,8 @@
     width: 400px;
 }
 
-.sb01-bebody .firstname-text {
+/* องค์ประกอบชื่ออื่นๆ */
+#sb-main .firstname-text {
     font-family: 'Roboto Condensed', sans-serif;
     position: absolute;
     top: -15px;
@@ -174,7 +163,7 @@
     z-index: 101;
 }
 
-.sb01-bebody .lastname-text {
+#sb-main .lastname-text {
     font-family: 'Mrs Saint Delafield', cursive;
     position: absolute;
     top: -10px;
@@ -188,9 +177,9 @@
 }
 
 /* Footer Description Box */
-.sb01-bebody .footer-description-box {
-    grid-area: collage; /* ซ้อนทับ */
-    transform: translate(100px, 530px); /* (left, top) */
+#sb-main .footer-description-box {
+    grid-area: collage; 
+    transform: translate(100px, 530px);
     width: 550px; 
     height: 120px;
     overflow-y: scroll;
