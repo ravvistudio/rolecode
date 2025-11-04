@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900;1,100..900&display=swap');
+
+/* ------------------ โครงสร้างหลัก (CSS Grid) ------------------ */
+
+#sb-main {
+    background: black; 
+    font-family: 'Arial', sans-serif;
+    display: flex; 
+    justify-content: center; 
+}
+
+/* คอนเทนเนอร์หลัก: กำหนดเป็น Grid และใช้ ID Selector ที่แข็งแกร่ง */
+#sb-main .scrapbook-grid-container {
+    width: 750px;
+    height: 900px;
+    
+    display: grid; 
+    grid-template-columns: 0.5fr 2fr 3fr 3fr 0.5fr;
+    grid-template-rows: 100px 100px 150px 150px 150px 100px 100px auto;
+    
+    z-index: 100;
+    overflow: visible;
+    --color-main-frame: #EDE8D7;
+    --color-inner-frame: #8C474D;
+    --color-note-bg: #B4A7C9;
+    --url-thing: url('https://i.imgur.com/k9b8zL3.png'); /* คอนโทรลเลอร์ */
+    --url-pen: url('https://i.imgur.com/7b1X5rW.png'); /* ปากกา */
+}
+
+/* ------------------ การจัดวางด้วย Grid Area (ซ้อนทับ) ------------------ */
+
+/* 1. กรอบรูปหลัก: วางไว้บริเวณกลาง */
+#sb-main .photo-frame {
+    grid-area: 3 / 2 / 7 / 5;
+    background-color: var(--color-main-frame);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative; 
+    transform: rotate(-3deg);
+    z-index: 2;
+}
+#sb-main .inner-frame {
+    position: absolute; top: -10px; left: -5px; width: 100%; height: 100%;
+    background-color: var(--color-inner-frame); z-index: -1; transform: rotate(5deg);
+}
+#sb-main .main-photo {
+    width: 100%; height: 100%; object-fit: cover; display: block; transform: rotate(3deg);
+}
+#sb-main .element-clip {
+    position: absolute; background-image: url('https://img2.pic.in.th/pic/clip01.png');
+    background-size: contain; background-repeat: no-repeat; width: 150px; height: 150px; 
+    top: -50px; left: 280px; transform: rotate(15deg); z-index: 6;
+}
+
+/* 2. โน้ต Sticker: วางทับรูปภาพ */
+#sb-main .note-sticker {
+    grid-area: 3 / 1 / 6 / 3;
+    width: 220px;
+    height: 220px;
+    background-color: var(--color-note-bg);
+    padding: 20px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    color: #2D2D2D;
+    text-align: left;
+    transform: translate(20px, 0) rotate(-10deg); 
+    z-index: 3;
+    line-height: 1.2; font-weight: 500;
+}
+#sb-main .note-title { font-size: 16px; margin-bottom: 5px; font-weight: bold; }
+#sb-main .note-time { font-size: 28px; margin: 0; }
+#sb-main .note-session { font-size: 18px; margin-top: 5px;}
+
+
+/* 3. ชื่อตัวละคร: วางทับด้านบนขวา */
+#sb-main .char-name-area {
+    grid-area: 1 / 3 / 3 / 5;
+    z-index: 100;
+    text-align: right;
+    position: relative;
+    transform: translate(0, 10px);
+}
+#sb-main .firstname-text {
+    font-family: 'Roboto Condensed', sans-serif; position: absolute; top: 20px; right: 100px;
+    font-size: 50px; font-weight: 900; color: #444; line-height: 1; z-index: 101;
+}
+#sb-main .lastname-text {
+    font-family: 'Mrs Saint Delafield', cursive; position: absolute; top: 40px; right: 20px;
+    font-size: 100px; font-weight: normal; color: var(--color-inner-frame); line-height: 1; z-index: 101;
+    transform: rotate(2deg);
+}
+
+/* 4. Quote Area: วางด้านบนซ้ายของชื่อ */
+#sb-main .quote-area {
+    grid-area: 1 / 1 / 2 / 3;
+    z-index: 1;
+    color: #fff;
+    font-size: 18px;
+    line-height: 1.2;
+    text-align: left;
+    transform: translate(30px, 40px); 
+}
+#sb-main .quote-style {
+    color: var(--color-inner-frame); font-weight: bold;
+}
+
+/* 5. ปากกา: วางทับโน้ตและรูป */
+#sb-main .element-pen {
+    grid-area: 4 / 2 / 6 / 4;
+    background-image: var(--url-pen); background-size: contain; background-repeat: no-repeat;
+    background-position: center; display: block; width: 180px; height: 180px;
+    transform: translate(20px, 10px) rotate(15deg); 
+    z-index: 5;
+}
+
+/* 6. คอนโทรลเลอร์: วางด้านขวาล่างของรูป */
+#sb-main .element-thing {
+    grid-area: 3 / 4 / 6 / 5;
+    background-image: var(--url-thing); background-size: contain; background-repeat: no-repeat;
+    background-position: center; display: block; width: 350px; height: 300px;
+    transform: translate(50px, 50px) rotate(-15deg); 
+    z-index: 5;
+}
+
+/* 7. คำอธิบายด้านล่าง: วางแถวสุดท้าย */
+#sb-main .footer-desc-box {
+    grid-area: 7 / 2 / 8 / 5;
+    width: 100%; 
+    height: 120px;
+    overflow-y: scroll;
+    padding: 10px;
+    text-align: justify;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #fff;
+    transform: translate(0, 20px);
+}
+
+/* Scrollbar Styles */
+#sb-main .footer-desc-box::-webkit-scrollbar { display: none; }
+#sb-main .footer-desc-box { -ms-overflow-style: none; scrollbar-width: none; }
